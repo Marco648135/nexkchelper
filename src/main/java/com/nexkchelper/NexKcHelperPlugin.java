@@ -143,7 +143,9 @@ public class NexKcHelperPlugin extends Plugin
 	private void reset()
 	{
 		active = false;
-		infoBoxManager.removeInfoBox(activeBox);
+		if (!infoBoxManager.getInfoBoxes().isEmpty()) {
+			infoBoxManager.removeInfoBox(activeBox);
+		}
 		npcs.clear();
 	}
 
