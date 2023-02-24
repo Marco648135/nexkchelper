@@ -92,30 +92,8 @@ public class NexKcHelperOverlay extends Overlay
         for (NPC npc : plugin.getNpcs())
         {
             Color outlineColor = Color.CYAN;
-            Color fillColor = new Color(0, 255, 255, 20);
-
-            if (config.outline() == NexKcHelperConfig.Outline.CLICKBOX)
-            {
-                NPCComposition npcComposition = npc.getTransformedComposition();
-                if (npcComposition == null)
-                {
-                    return null;
-                }
-
-                Shape objectClickbox = npc.getConvexHull();
-                if (objectClickbox == null)
-                {
-                    return null;
-                }
-
-                renderPoly(graphics, outlineColor, fillColor, objectClickbox);
-            }
-            else if (config.outline() == NexKcHelperConfig.Outline.MODEL)
-            {
-                modelOutlineRenderer.drawOutline(npc, 2, outlineColor, 2);
-            }
+            modelOutlineRenderer.drawOutline(npc, 2, outlineColor, 2);
         }
-
         return null;
     }
 
