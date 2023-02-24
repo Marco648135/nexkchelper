@@ -30,3 +30,4 @@ public interface NexKcHelperConfig extends Config
 	)
 	default boolean excludeRangeMelee() { return true; }
 }
+
