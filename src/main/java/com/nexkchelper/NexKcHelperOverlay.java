@@ -34,10 +34,11 @@ public class NexKcHelperOverlay extends Overlay
     @Override
     public Dimension render(Graphics2D graphics)
     {
+
         for (NPC npc : plugin.getNpcs())
         {
-            Color outlineColor = Color.CYAN;
-            modelOutlineRenderer.drawOutline(npc, 2, outlineColor, 2);
+            Color outlineColor = config.outlineColor();
+            modelOutlineRenderer.drawOutline(npc, config.outlineWidth(), outlineColor, config.outlineFeather());
         }
         return null;
     }
@@ -45,6 +46,7 @@ public class NexKcHelperOverlay extends Overlay
 
     private void renderPoly(Graphics2D graphics, Color outlineColor, Color fillColor, Shape polygon)
     {
+        System.out.println("TRYING TO RENDER POLY");
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setColor(outlineColor);
         graphics.setStroke(new BasicStroke((float) 2));

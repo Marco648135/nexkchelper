@@ -1,10 +1,8 @@
 package com.nexkchelper;
 
-import net.runelite.client.config.Config;
-import net.runelite.client.config.ConfigGroup;
-import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.Keybind;
+import net.runelite.client.config.*;
 
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -29,5 +27,48 @@ public interface NexKcHelperConfig extends Config
 			description = "Will exclude spiritual warriors and rangers from being marked."
 	)
 	default boolean excludeRangeMelee() { return true; }
+
+	enum Outline {
+		CLICKBOX,
+		MODEL,
+	}
+
+	@ConfigItem(
+			position = 2,
+			keyName = "outlineStyle",
+			name = "Outline Style",
+			description = "The style of the outline around the NPCs."
+	)
+	default Outline outline() { return Outline.CLICKBOX; }
+
+
+
+	@Alpha
+	@ConfigItem(
+			keyName = "outlineColor",
+			name = "Outline Color",
+			description = "Configures the outline colour.",
+			position = 3
+	)
+	default Color outlineColor()
+	{
+		return Color.WHITE;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "outlineWidth",
+			name = "Outline Width",
+			description = "The width of the outline around the NPCs."
+	)
+	default int outlineWidth() { return 2; }
+
+	@ConfigItem(
+			position = 5,
+			keyName = "outlineFeather",
+			name = "Outline Feather",
+			description = "The feather of the outline around the NPCs."
+	)
+	default int outlineFeather() { return 2; }
 }
 
