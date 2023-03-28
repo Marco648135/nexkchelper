@@ -45,29 +45,42 @@ public interface NexKcHelperConfig extends Config
 
 	@Alpha
 	@ConfigItem(
+			position = 3,
 			keyName = "outlineColor",
 			name = "Outline Color",
-			description = "Configures the outline colour.",
-			position = 3
+			description = "Configures the outline colour."
 	)
 	default Color outlineColor()
 	{
 		return Color.WHITE;
 	}
 
+	@Alpha
 	@ConfigItem(
 			position = 4,
+			keyName = "fillColor",
+			name = "Fill Color",
+			description = "Configures the fill colour for hull style."
+	)
+	default Color fillColor()
+	{
+		return new Color(255, 255, 255, 60);
+	}
+
+
+	@ConfigItem(
+			position = 5,
 			keyName = "outlineWidth",
 			name = "Outline Width",
-			description = "The width of the outline around the NPCs."
+			description = "The width of the outline around the NPCs (model outline)."
 	)
 	default int outlineWidth() { return 2; }
 
 	@ConfigItem(
-			position = 5,
+			position = 6,
 			keyName = "outlineFeather",
 			name = "Outline Feather",
-			description = "The feather of the outline around the NPCs."
+			description = "The feather of the outline around the NPCs (model outline)."
 	)
 	default int outlineFeather() { return 2; }
 }

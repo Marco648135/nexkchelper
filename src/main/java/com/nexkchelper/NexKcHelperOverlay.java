@@ -34,19 +34,37 @@ public class NexKcHelperOverlay extends Overlay
     @Override
     public Dimension render(Graphics2D graphics)
     {
-
-        for (NPC npc : plugin.getNpcs())
-        {
-            Color outlineColor = config.outlineColor();
-            modelOutlineRenderer.drawOutline(npc, config.outlineWidth(), outlineColor, config.outlineFeather());
+        Color outlineColor = config.outlineColor();
+        Color fillColor = config.fillColor();
+        for (NPC npc: plugin.getNpcs()) {
+            {
+                if (config.outline() == NexKcHelperConfig.Outline.CLICKBOX)
+                    hullOutline(npc, graphics, outlineColor, fillColor);
+                else
+                    modelOutlineRenderer.drawOutline(npc, config.outlineWidth(), outlineColor, config.outlineFeather());
+            }
         }
+
         return null;
     }
 
 
+    private void hullOutline(NPC npc, Graphics2D graphics, Color outlineColor, Color fillColor)
+    {
+        NPCComposition npcComposition = npc.getTransformedComposition();
+
+        if (npcComposition != null)
+        {
+            Shape objectClickbox = npc.getConvexHull();
+            if (objectClickbox != null)
+            {
+                renderPoly(graphics, outlineColor, fillColor, objectClickbox);
+            }
+        }
+    }
+
     private void renderPoly(Graphics2D graphics, Color outlineColor, Color fillColor, Shape polygon)
     {
-        System.out.println("TRYING TO RENDER POLY");
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setColor(outlineColor);
         graphics.setStroke(new BasicStroke((float) 2));
